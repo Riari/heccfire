@@ -1,0 +1,22 @@
+[gd_resource type="Environment" load_steps=2 format=2]
+
+[ext_resource path="res://sky/procedural_hell_1.tres" type="ProceduralSky" id=1]
+
+[resource]
+background_mode = 2
+background_sky = ExtResource( 1 )
+background_color = Color( 1, 0.258824, 0, 1 )
+ambient_light_color = Color( 1, 1, 1, 1 )
+ambient_light_sky_contribution = 0.6
+fog_enabled = true
+fog_color = Color( 0.184314, 0.0509804, 0.00392157, 1 )
+fog_depth_end = 56.3
+ssao_enabled = true
+ssao_radius = 3.8
+ssao_intensity = 4.46
+ssao_quality = 2
+glow_enabled = true
+glow_intensity = 8.0
+glow_strength = 0.92
+glow_bicubic_upscale = true
+glow_high_quality = true

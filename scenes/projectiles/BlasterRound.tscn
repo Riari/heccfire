@@ -1,0 +1,27 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://materials/blaster_round.tres" type="Material" id=1]
+[ext_resource path="res://shapes/capsule_blaster_round.tres" type="CapsuleMesh" id=2]
+[ext_resource path="res://scripts/BlasterRound.gd" type="Script" id=3]
+
+[sub_resource type="CapsuleShape" id=2]
+radius = 0.01
+height = 0.05
+
+[node name="BlasterRound" type="Area"]
+script = ExtResource( 3 )
+
+[node name="MeshInstance" type="MeshInstance" parent="."]
+cast_shadow = 0
+mesh = ExtResource( 2 )
+material/0 = ExtResource( 1 )
+
+[node name="CollisionShape" type="CollisionShape" parent="."]
+shape = SubResource( 2 )
+
+[node name="OmniLight" type="OmniLight" parent="."]
+layers = 3
+light_color = Color( 1, 0.654902, 0, 1 )
+light_energy = 3.0
+
+[connection signal="body_entered" from="." to="." method="on_body_entered"]
