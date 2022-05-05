@@ -48,7 +48,6 @@ shape = SubResource( 2 )
 
 [node name="BlasterAmmo" type="Spatial" parent="Types"]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, -0.438195, 0 )
-visible = false
 
 [node name="Frame" type="MeshInstance" parent="Types/BlasterAmmo"]
 transform = Transform( 7.54979e-08, 0.1, 0, -1, 7.54979e-09, 0, 0, 0, 1, 0, 1, 0 )

@@ -206,9 +206,14 @@ _global_script_class_icons={
 
 [application]
 
-config/name="Survival Shooter"
+config/name="Heccfire"
 run/main_scene="res://scenes/maps/Quad.tscn"
 config/icon="res://icon.png"
+
+[display]
+
+window/size/width=1280
+window/size/height=720
 
 [editor_plugins]
 
@@ -259,4 +264,4 @@ common/enable_pause_aware_picking=true
 [rendering]
 
 quality/filters/anisotropic_filter_level=1
-quality/filters/msaa=3
+quality/filters/use_fxaa=true
