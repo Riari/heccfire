@@ -104,8 +104,10 @@ func _process(_delta):
 func _physics_process(delta):
 	var desired_velocity = get_input() * max_air_speed
 	
-	if !is_on_floor() || velocity.y == 0:
+	if !is_on_floor():
 		velocity.y += delta * gravity
+	elif desired_velocity.y != 0:
+		velocity.y = desired_velocity.y
 
 	velocity.x = lerp(velocity.x, desired_velocity.x, delta * acceleration)
 	velocity.z = lerp(velocity.z, desired_velocity.z, delta * acceleration)
