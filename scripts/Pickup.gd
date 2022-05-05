@@ -14,6 +14,7 @@ var active = true
 var cooldown_timer = cooldown_time
 var mesh_container: Node
 var meshes = []
+var cooldown_material = SpatialMaterial.new()
 
 signal picked_up
 
@@ -21,6 +22,8 @@ func _ready():
 	origin = self.global_transform.origin
 	mesh_container = mesh_containers[pickup_type]
 	mesh_container.show()
+	cooldown_material.flags_transparent = true
+	cooldown_material.albedo_color = cooldown_color
 
 	for c in mesh_container.get_children():
 		if c is MeshInstance:
@@ -40,13 +43,7 @@ func _process(delta):
 func set_active(is_active: bool):
 	active = is_active
 	for mesh in meshes:
-		if is_active:
-			mesh.material_override = null
-		else:
-			var material = SpatialMaterial.new()
-			material.flags_transparent = true
-			material.albedo_color = cooldown_color
-			mesh.material_override = material
+		mesh.material_override = null if is_active else cooldown_material
 
 func on_body_entered(node: Node):
 	if active && node.get_meta("type") == "player":
