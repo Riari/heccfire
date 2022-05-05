@@ -1,4 +1,4 @@
-[gd_scene load_steps=39 format=2]
+[gd_scene load_steps=41 format=2]
 
 [ext_resource path="res://addons/qodot/game_definitions/fgd/qodot_fgd.tres" type="Resource" id=1]
 [ext_resource path="res://addons/qodot/src/nodes/qodot_map.gd" type="Script" id=2]
@@ -8,10 +8,21 @@
 [ext_resource path="res://textures/HTRAC1c.png" type="Texture" id=6]
 [ext_resource path="res://textures/eldrich2.png" type="Texture" id=7]
 [ext_resource path="res://scenes/spawns/Player.tscn" type="PackedScene" id=8]
-[ext_resource path="res://scenes/projectiles/BlasterRound.tscn" type="PackedScene" id=9]
 [ext_resource path="res://scenes/ui/HUD.tscn" type="PackedScene" id=10]
 [ext_resource path="res://scenes/pickups/Pickup.tscn" type="PackedScene" id=11]
 [ext_resource path="res://scripts/Pickups.gd" type="Script" id=12]
+
+[sub_resource type="SphereShape" id=27]
+
+[sub_resource type="SphereMesh" id=28]
+
+[sub_resource type="SpatialMaterial" id=29]
+albedo_color = Color( 1, 0, 0.0705882, 1 )
+emission_enabled = true
+emission = Color( 1, 0, 0.235294, 1 )
+emission_energy = 1.0
+emission_operator = 0
+emission_on_uv2 = false
 
 [sub_resource type="SpatialMaterial" id=1]
 
@@ -155,31 +166,42 @@ points = PoolVector3Array( -24, 4, -23, -24, 0, -23, -23, 0, -23, -23, 4, -23, -
 
 [node name="Player" parent="." instance=ExtResource( 8 )]
 transform = Transform( -0.707107, 0, -0.707107, 0, 1, 0, 0.707107, 0, -0.707107, -9.52858, 0.523029, -9 )
-Bullet = ExtResource( 9 )
+
+[node name="Spawns" type="Spatial" parent="."]
+
+[node name="KinematicBody" type="KinematicBody" parent="Spawns"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.12991, 0 )
+
+[node name="CollisionShape" type="CollisionShape" parent="Spawns/KinematicBody"]
+shape = SubResource( 27 )
+
+[node name="MeshInstance" type="MeshInstance" parent="Spawns/KinematicBody"]
+mesh = SubResource( 28 )
+material/0 = SubResource( 29 )
 
 [node name="Pickups" type="Spatial" parent="."]
 script = ExtResource( 12 )
 
-[node name="Pickup" parent="Pickups" instance=ExtResource( 11 )]
+[node name="Pickup1" parent="Pickups" instance=ExtResource( 11 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.0137, 0 )
 cooldown_color = Color( 0.501961, 0.501961, 0.501961, 0.101961 )
 
 [node name="Pickup2" parent="Pickups" instance=ExtResource( 11 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.02445, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 19.538, 1.0393, 19.4354 )
 
 [node name="Pickup3" parent="Pickups" instance=ExtResource( 11 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 12.538, 1.0393, 12.4354 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -19.662, 1.0393, 19.5354 )
 
 [node name="Pickup4" parent="Pickups" instance=ExtResource( 11 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -12.662, 1.0393, 12.5354 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 19.438, 1.0393, -19.4646 )
 
 [node name="Pickup5" parent="Pickups" instance=ExtResource( 11 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 12.438, 1.0393, -12.4646 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -19.562, 1.0393, -19.4646 )
 
 [node name="Lights" type="Spatial" parent="."]
 
 [node name="OmniLight" type="OmniLight" parent="Lights"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6.67247, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 7.20805, 0 )
 layers = 3
 light_color = Color( 1, 0, 0, 1 )
 light_energy = 5.417

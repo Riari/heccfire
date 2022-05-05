@@ -23,10 +23,10 @@ size_flags_vertical = 3
 
 [node name="Crosshair" type="TextureRect" parent="CrosshairContainer"]
 modulate = Color( 0.611765, 0.611765, 0.611765, 1 )
-margin_left = 480.0
-margin_top = 268.0
-margin_right = 544.0
-margin_bottom = 332.0
+margin_left = 608.0
+margin_top = 328.0
+margin_right = 672.0
+margin_bottom = 392.0
 mouse_filter = 2
 texture = ExtResource( 1 )
 
