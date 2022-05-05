@@ -20,14 +20,18 @@ signal picked_up
 
 func _ready():
 	origin = self.global_transform.origin
+
+	for n in mesh_containers.values():
+		n.hide()
+
 	mesh_container = mesh_containers[pickup_type]
 	mesh_container.show()
 	cooldown_material.flags_transparent = true
 	cooldown_material.albedo_color = cooldown_color
 
-	for c in mesh_container.get_children():
-		if c is MeshInstance:
-			meshes.append(c)
+	for n in mesh_container.get_children():
+		if n is MeshInstance:
+			meshes.append(n)
 
 func _process(delta):
 	self.rotate_y(delta)
