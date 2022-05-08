@@ -1,4 +1,4 @@
-[gd_scene load_steps=42 format=2]
+[gd_scene load_steps=41 format=2]
 
 [ext_resource path="res://addons/qodot/game_definitions/fgd/qodot_fgd.tres" type="Resource" id=1]
 [ext_resource path="res://addons/qodot/src/nodes/qodot_map.gd" type="Script" id=2]
@@ -9,7 +9,6 @@
 [ext_resource path="res://textures/eldrich2.png" type="Texture" id=7]
 [ext_resource path="res://scenes/spawns/Player.tscn" type="PackedScene" id=8]
 [ext_resource path="res://scenes/projectiles/BlasterRound.tscn" type="PackedScene" id=9]
-[ext_resource path="res://scenes/ui/HUD.tscn" type="PackedScene" id=10]
 [ext_resource path="res://scenes/pickups/Pickup.tscn" type="PackedScene" id=11]
 [ext_resource path="res://scripts/Pickups.gd" type="Script" id=12]
 
@@ -163,8 +162,6 @@ points = PoolVector3Array( -24, 4, -23, -24, 0, -23, -23, 0, -23, -23, 4, -23, -
 
 [node name="Spatial" type="Spatial"]
 
-[node name="HUD" parent="." instance=ExtResource( 10 )]
-
 [node name="Player" parent="." instance=ExtResource( 8 )]
 transform = Transform( -0.707107, 0, -0.707107, 0, 1, 0, 0.707107, 0, -0.707107, -9.52858, 0.523029, -9 )
 Projectile = ExtResource( 9 )
@@ -178,7 +175,6 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.12991, 0 )
 shape = SubResource( 27 )
 
 [node name="MeshInstance" type="MeshInstance" parent="Spawns/KinematicBody"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.101101, -0.0189643, -0.142897 )
 mesh = SubResource( 28 )
 material/0 = SubResource( 29 )
 

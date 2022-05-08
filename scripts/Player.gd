@@ -1,7 +1,7 @@
 extends KinematicBody
 
-export var max_speed = 12
-export var max_air_speed = 10
+export var max_speed = 16
+export var max_air_speed = 16
 export var acceleration = 10.0
 export var mouse_sensitivity = 0.002  # radians/pixel
 export (PackedScene) var Projectile
@@ -18,6 +18,7 @@ onready var weapon_viewport = $Head/WeaponViewportContainer/WeaponViewport
 onready var weapon_cam = $Head/WeaponViewportContainer/WeaponViewport/WeaponCam
 onready var weapon_muzzle = $Head/WeaponMuzzle
 onready var weapon_fire_audio = $Head/WeaponMuzzle/WeaponFire
+onready var jump_audio = $Jump
 
 var gravity = -30
 var weapon_accuracy = 0.03
@@ -69,8 +70,9 @@ func get_input():
 		input_dir += -global_transform.basis.x
 	if Input.is_action_pressed("strafe_right"):
 		input_dir += global_transform.basis.x
-	if Input.is_action_pressed("jump"):
+	if Input.is_action_just_released("jump"):
 		input_dir += global_transform.basis.y
+		jump_audio.play()
 
 	return input_dir.normalized()
 
@@ -131,6 +133,8 @@ func on_pickup(node: Node, type: String, amount: int):
 				weapon = Weapon.BLASTER
 
 		add_ammo(weapon, amount)
+
+		$HUD.on_pickup(node, type, amount)
 
 func set_ammo(weapon: int, amount: int):
 	ammo[weapon] = amount
