@@ -206,7 +206,7 @@ _global_script_class_icons={
 
 [application]
 
-config/name="Heccfire"
+config/name="Armaros"
 run/main_scene="res://scenes/maps/Quad.tscn"
 config/icon="res://icon.png"
 

@@ -1,4 +1,4 @@
-[gd_scene load_steps=41 format=2]
+[gd_scene load_steps=40 format=2]
 
 [ext_resource path="res://addons/qodot/game_definitions/fgd/qodot_fgd.tres" type="Resource" id=1]
 [ext_resource path="res://addons/qodot/src/nodes/qodot_map.gd" type="Script" id=2]
@@ -8,7 +8,6 @@
 [ext_resource path="res://textures/HTRAC1c.png" type="Texture" id=6]
 [ext_resource path="res://textures/eldrich2.png" type="Texture" id=7]
 [ext_resource path="res://scenes/spawns/Player.tscn" type="PackedScene" id=8]
-[ext_resource path="res://scenes/projectiles/BlasterRound.tscn" type="PackedScene" id=9]
 [ext_resource path="res://scenes/pickups/Pickup.tscn" type="PackedScene" id=11]
 [ext_resource path="res://scripts/Pickups.gd" type="Script" id=12]
 
@@ -164,7 +163,6 @@ points = PoolVector3Array( -24, 4, -23, -24, 0, -23, -23, 0, -23, -23, 4, -23, -
 
 [node name="Player" parent="." instance=ExtResource( 8 )]
 transform = Transform( -0.707107, 0, -0.707107, 0, 1, 0, 0.707107, 0, -0.707107, -9.52858, 0.523029, -9 )
-Projectile = ExtResource( 9 )
 
 [node name="Spawns" type="Spatial" parent="."]
 
@@ -217,7 +215,7 @@ omni_range = 10.0
 
 [node name="QodotMap" type="Spatial" parent="."]
 script = ExtResource( 2 )
-map_file = "C:/Users/riari/Code/heccfire/maps/Quad.map"
+map_file = "C:/Users/riari/Code/armaros/maps/Quad.map"
 inverse_scale_factor = 16.0
 entity_fgd = ExtResource( 1 )
 base_texture_dir = "res://textures"

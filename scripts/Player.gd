@@ -77,7 +77,7 @@ func get_input():
 	return input_dir.normalized()
 
 func _unhandled_input(event):
-	if Input.is_action_just_pressed("alt_fire"):
+	if Input.is_action_just_pressed("ui_cancel"):
 		if Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED:
 			Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 		else:
@@ -91,17 +91,10 @@ func _unhandled_input(event):
 func _process(_delta):
 	weapon_cam.global_transform = camera.global_transform
 
-	if Input.is_action_just_pressed("fire") && ammo[current_weapon] > 0:
-		var p = Projectile.instance()
-		get_parent().add_child(p)
-		p.transform = weapon_muzzle.global_transform
-		p.rotate_x(rand_range(-weapon_accuracy, weapon_accuracy))
-		p.rotate_y(rand_range(-weapon_accuracy, weapon_accuracy))
-		p.velocity = -p.transform.basis.z * p.muzzle_velocity
-		hand.transform.origin.z += recoil_intensity
-		hand.rotate_x(recoil_intensity * 2.0)
-		weapon_fire_audio.play()
-		remove_ammo(current_weapon, ammo_cost[current_weapon])
+	if !Input.is_action_just_pressed("fire") && ammo[current_weapon] <= 0:
+		return
+
+	fire()
 
 func _physics_process(delta):
 	var desired_velocity = get_input() * max_air_speed
@@ -126,15 +119,29 @@ func _physics_process(delta):
 	hand.rotation.x = lerp(hand.rotation.x, hand_rotation.x, delta * HAND_MOTION_LERP_SPEED)
 
 func on_pickup(node: Node, type: String, amount: int):
-	if node == self:
-		var weapon
-		match type:
-			"AMMO_BLASTER":
-				weapon = Weapon.BLASTER
+	if node != self:
+		return
 
-		add_ammo(weapon, amount)
+	var weapon
+	match type:
+		"AMMO_BLASTER":
+			weapon = Weapon.BLASTER
 
-		$HUD.on_pickup(node, type, amount)
+	add_ammo(weapon, amount)
+
+	$HUD.on_pickup(node, type, amount)
+
+func fire():
+	var p = Projectile.instance()
+	get_parent().add_child(p)
+	p.transform = weapon_muzzle.global_transform
+	p.rotate_x(rand_range(-weapon_accuracy, weapon_accuracy))
+	p.rotate_y(rand_range(-weapon_accuracy, weapon_accuracy))
+	p.velocity = -p.transform.basis.z * p.muzzle_velocity
+	hand.transform.origin.z += recoil_intensity
+	hand.rotate_x(recoil_intensity * 2.0)
+	weapon_fire_audio.play()
+	remove_ammo(current_weapon, ammo_cost[current_weapon])
 
 func set_ammo(weapon: int, amount: int):
 	ammo[weapon] = amount
