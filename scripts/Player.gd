@@ -41,6 +41,9 @@ var ammo_cost = {
 
 var current_weapon = Weapon.BLASTER
 
+var health = 100
+
+signal health_changed
 signal ammo_changed
 
 func _ready():
@@ -52,6 +55,7 @@ func _ready():
 	
 	weapon_viewport.world = get_world()
 
+	set_health(100)
 	set_ammo(Weapon.BLASTER, 30)
 	set_meta("type", "player")
 
@@ -140,6 +144,10 @@ func fire():
 	hand.rotate_x(recoil_intensity * 2.0)
 	weapon_fire_audio.play()
 	remove_ammo(current_weapon, ammo_cost[current_weapon])
+
+func set_health(amount: int):
+	health = amount
+	emit_signal("health_changed", health)
 
 func set_ammo(weapon: int, amount: int):
 	ammo[weapon] = amount

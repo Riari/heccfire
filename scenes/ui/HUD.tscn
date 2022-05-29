@@ -40,7 +40,41 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 margin_top = -107.0
 
-[node name="AmmoCount" type="RichTextLabel" parent="."]
+[node name="Health" type="Control" parent="Panel"]
+anchor_right = 0.123
+anchor_bottom = 1.0
+margin_right = -0.440002
+
+[node name="Count" type="RichTextLabel" parent="Panel/Health"]
+anchor_top = 1.0
+anchor_bottom = 1.0
+margin_left = 33.0
+margin_top = -56.0
+margin_right = 133.0
+margin_bottom = -21.0
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+text = "000"
+
+[node name="Label" type="RichTextLabel" parent="Panel/Health"]
+anchor_top = 1.0
+anchor_bottom = 1.0
+margin_left = 33.0
+margin_top = -80.0
+margin_right = 185.0
+margin_bottom = -47.0
+rect_scale = Vector2( 0.6, 0.6 )
+custom_colors/default_color = Color( 0, 1, 0.552941, 1 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+bbcode_text = "Health"
+text = "Health"
+
+[node name="Ammo" type="Control" parent="Panel"]
+anchor_right = 0.123
+anchor_bottom = 1.0
+margin_left = 157.0
+margin_right = 156.56
+
+[node name="Count" type="RichTextLabel" parent="Panel/Ammo"]
 anchor_top = 1.0
 anchor_bottom = 1.0
 margin_left = 33.0
@@ -50,7 +84,7 @@ margin_bottom = -21.0
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
 text = "10"
 
-[node name="AmmoCountLabel" type="RichTextLabel" parent="."]
+[node name="Label" type="RichTextLabel" parent="Panel/Ammo"]
 anchor_top = 1.0
 anchor_bottom = 1.0
 margin_left = 33.0

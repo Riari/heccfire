@@ -88,3 +88,4 @@ stream = ExtResource( 8 )
 volume_db = -8.0
 
 [connection signal="ammo_changed" from="." to="HUD" method="on_ammo_changed"]
+[connection signal="health_changed" from="." to="HUD" method="on_health_changed"]
