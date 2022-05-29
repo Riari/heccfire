@@ -9,6 +9,10 @@ export var sway_right : Vector3
 export var sway_normal : Vector3
 
 func _input(event):
+	if Input.get_mouse_mode() != Input.MOUSE_MODE_CAPTURED:
+		mouse_moved = 0
+		return
+
 	if event is InputEventMouseMotion:
 		mouse_moved = -event.relative.x
 

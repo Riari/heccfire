@@ -77,21 +77,18 @@ func get_input():
 	return input_dir.normalized()
 
 func _unhandled_input(event):
-	if Input.is_action_just_pressed("ui_cancel"):
-		if Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED:
-			Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
-		else:
-			Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
-
-	if event is InputEventMouseMotion and Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED:
+	if event is InputEventMouseMotion && Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED:
 		rotate_y(-event.relative.x * mouse_sensitivity)
 		head.rotate_x(-event.relative.y * mouse_sensitivity)
 		head.rotation.x = clamp(head.rotation.x, -1.2, 1.2)
 
 func _process(_delta):
+	if Input.get_mouse_mode() != Input.MOUSE_MODE_CAPTURED:
+		return
+
 	weapon_cam.global_transform = camera.global_transform
 
-	if !Input.is_action_just_pressed("fire") && ammo[current_weapon] <= 0:
+	if !Input.is_action_just_pressed("fire") || ammo[current_weapon] <= 0:
 		return
 
 	fire()
@@ -116,7 +113,8 @@ func _physics_process(delta):
 	elif hand.transform.origin != hand_origin:
 		hand.transform.origin = lerp(hand.transform.origin, hand_origin, delta * HAND_MOTION_LERP_SPEED)
 
-	hand.rotation.x = lerp(hand.rotation.x, hand_rotation.x, delta * HAND_MOTION_LERP_SPEED)
+	if Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED:
+		hand.rotation.x = lerp(hand.rotation.x, hand_rotation.x, delta * HAND_MOTION_LERP_SPEED)
 
 func on_pickup(node: Node, type: String, amount: int):
 	if node != self:
