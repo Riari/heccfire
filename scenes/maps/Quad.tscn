@@ -1,4 +1,4 @@
-[gd_scene load_steps=39 format=2]
+[gd_scene load_steps=40 format=2]
 
 [ext_resource path="res://addons/qodot/game_definitions/fgd/qodot_fgd.tres" type="Resource" id=1]
 [ext_resource path="res://addons/qodot/src/nodes/qodot_map.gd" type="Script" id=2]
@@ -8,7 +8,8 @@
 [ext_resource path="res://textures/HTRAC1c.png" type="Texture" id=6]
 [ext_resource path="res://textures/eldrich2.png" type="Texture" id=7]
 [ext_resource path="res://scenes/spawns/Player.tscn" type="PackedScene" id=8]
-[ext_resource path="res://scenes/spawns/EnemyOrb1.tscn" type="PackedScene" id=9]
+[ext_resource path="res://scenes/spawns/EnemySpawner.tscn" type="PackedScene" id=9]
+[ext_resource path="res://scenes/spawns/EnemyOrb1.tscn" type="PackedScene" id=10]
 [ext_resource path="res://scenes/pickups/Pickup.tscn" type="PackedScene" id=11]
 [ext_resource path="res://scripts/Pickups.gd" type="Script" id=12]
 
@@ -195,22 +196,13 @@ light_energy = 5.417
 shadow_enabled = true
 omni_range = 10.0
 
+[node name="EnemySpawner" parent="." instance=ExtResource( 9 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6, 0 )
+NavigationNode = NodePath("../SpawnNavigation")
+Enemy = ExtResource( 10 )
+cooldown_time = 1
+
 [node name="SpawnNavigation" type="Navigation" parent="."]
-
-[node name="EnemyOrb1" parent="SpawnNavigation" instance=ExtResource( 9 )]
-transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 2, 5.72991, 0 )
-
-[node name="EnemyOrb2" parent="SpawnNavigation" instance=ExtResource( 9 )]
-transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -2, 5.72991, 0 )
-
-[node name="EnemyOrb3" parent="SpawnNavigation" instance=ExtResource( 9 )]
-transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 5.72991, -3 )
-
-[node name="EnemyOrb4" parent="SpawnNavigation" instance=ExtResource( 9 )]
-transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 2, 5.72991, -3 )
-
-[node name="EnemyOrb5" parent="SpawnNavigation" instance=ExtResource( 9 )]
-transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -2, 5.72991, -3 )
 
 [node name="NavigationMeshInstance" type="NavigationMeshInstance" parent="SpawnNavigation"]
 navmesh = SubResource( 2 )

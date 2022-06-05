@@ -76,7 +76,6 @@ func get_input():
 		input_dir += global_transform.basis.x
 	if Input.is_action_just_released("jump"):
 		input_dir += global_transform.basis.y
-		jump_audio.play()
 
 	return input_dir.normalized()
 
