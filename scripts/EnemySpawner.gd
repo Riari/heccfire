@@ -1,13 +1,13 @@
 extends Node
 
-export (NodePath) var NavigationNode
-export (PackedScene) var Enemy
+@export (NodePath) var NavigationNode
+@export (PackedScene) var Enemy
 
-export var cooldown_time = 5
-export var max_spawns = 10
+@export var cooldown_time = 5
+@export var max_spawns = 10
 
-onready var timer: Timer = $Timer
-onready var nav = get_node(NavigationNode)
+@onready var timer: Timer = $Timer
+@onready var nav = get_node(NavigationNode)
 
 var spawns = 0
 
@@ -21,7 +21,7 @@ func reset():
 	timer.start()
 
 func on_timer_timeout():
-	var e = Enemy.instance()
+	var e = Enemy.instantiate()
 	e.global_transform = self.global_transform
 	nav.add_child(e)
 	spawns += 1

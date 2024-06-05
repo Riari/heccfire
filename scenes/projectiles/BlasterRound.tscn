@@ -4,22 +4,22 @@
 [ext_resource path="res://shapes/capsule_blaster_round.tres" type="CapsuleMesh" id=2]
 [ext_resource path="res://scripts/BlasterRound.gd" type="Script" id=3]
 
-[sub_resource type="CapsuleShape" id=2]
+[sub_resource type="CapsuleShape3D" id=2]
 radius = 0.01
 height = 0.05
 
-[node name="BlasterRound" type="Area"]
+[node name="BlasterRound" type="Area3D"]
 script = ExtResource( 3 )
 
-[node name="MeshInstance" type="MeshInstance" parent="."]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 cast_shadow = 0
 mesh = ExtResource( 2 )
 material/0 = ExtResource( 1 )
 
-[node name="CollisionShape" type="CollisionShape" parent="."]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource( 2 )
 
-[node name="OmniLight" type="OmniLight" parent="."]
+[node name="OmniLight3D" type="OmniLight3D" parent="."]
 layers = 3
 light_color = Color( 1, 0.654902, 0, 1 )
 light_energy = 3.0

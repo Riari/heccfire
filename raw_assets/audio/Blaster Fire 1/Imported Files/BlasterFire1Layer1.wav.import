@@ -1,13 +1,14 @@
 [remap]
 
 importer="wav"
-type="AudioStreamSample"
-path="res://.import/BlasterFire1Layer1.wav-57ec51b92a70807430bd9d2676924f4c.sample"
+type="AudioStreamWAV"
+uid="uid://cuvqvxlpa8uct"
+path="res://.godot/imported/BlasterFire1Layer1.wav-57ec51b92a70807430bd9d2676924f4c.sample"
 
 [deps]
 
 source_file="res://raw_assets/audio/Blaster Fire 1/Imported Files/BlasterFire1Layer1.wav"
-dest_files=[ "res://.import/BlasterFire1Layer1.wav-57ec51b92a70807430bd9d2676924f4c.sample" ]
+dest_files=["res://.godot/imported/BlasterFire1Layer1.wav-57ec51b92a70807430bd9d2676924f4c.sample"]
 
 [params]
 
@@ -17,5 +18,7 @@ force/max_rate=false
 force/max_rate_hz=44100
 edit/trim=false
 edit/normalize=false
-edit/loop=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
 compress/mode=0

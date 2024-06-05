@@ -1,9 +1,9 @@
 extends Control
 
-onready var health = $Panel/Health/Count
-onready var ammo = $Panel/Ammo/Count
+@onready var health = $Panel/Health/Count
+@onready var ammo = $Panel/Ammo/Count
 
-export var pickup_animation_time = 0.6
+@export var pickup_animation_time = 0.6
 
 var health_amount = 0
 var ammo_amount = 0
@@ -13,13 +13,13 @@ func _process(delta: float):
 	ease_back(ammo, delta)
 
 func embiggen(label: RichTextLabel):
-	label.rect_scale.x = 2.0
-	label.rect_scale.y = 2.0
+	label.scale.x = 2.0
+	label.scale.y = 2.0
 
 func ease_back(label: RichTextLabel, delta: float):
-	if label.rect_scale.x > 1.0:
-		label.rect_scale.x -= ease(delta / pickup_animation_time, 0.5)
-		label.rect_scale.y -= ease(delta / pickup_animation_time, 0.5)
+	if label.scale.x > 1.0:
+		label.scale.x -= ease(delta / pickup_animation_time, 0.5)
+		label.scale.y -= ease(delta / pickup_animation_time, 0.5)
 
 func on_health_changed(amount: int):
 	if amount > health_amount:

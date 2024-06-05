@@ -2,12 +2,13 @@
 
 importer="qodot.map"
 type="Resource"
-path="res://.import/Test.1.map-83377dd9e0a0b3d11a171b65bbabe3db.tres"
+uid="uid://hobrw4i5gk6k"
+path="res://.godot/imported/Test.1.map-83377dd9e0a0b3d11a171b65bbabe3db.tres"
 
 [deps]
 
 source_file="res://maps/autosave/Test.1.map"
-dest_files=[ "res://.import/Test.1.map-83377dd9e0a0b3d11a171b65bbabe3db.tres" ]
+dest_files=["res://.godot/imported/Test.1.map-83377dd9e0a0b3d11a171b65bbabe3db.tres"]
 
 [params]
 

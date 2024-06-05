@@ -2,14 +2,18 @@
 
 importer="mp3"
 type="AudioStreamMP3"
-path="res://.import/Jump1.mp3-97769d80ae2c3356655399bfc6a2c593.mp3str"
+uid="uid://ck8fra8v3ikrk"
+path="res://.godot/imported/Jump1.mp3-97769d80ae2c3356655399bfc6a2c593.mp3str"
 
 [deps]
 
 source_file="res://raw_assets/audio/Jump1.mp3"
-dest_files=[ "res://.import/Jump1.mp3-97769d80ae2c3356655399bfc6a2c593.mp3str" ]
+dest_files=["res://.godot/imported/Jump1.mp3-97769d80ae2c3356655399bfc6a2c593.mp3str"]
 
 [params]
 
 loop=false
 loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

@@ -2,12 +2,13 @@
 
 importer="qodot.map"
 type="Resource"
-path="res://.import/Quad.map-5b692fa3c4c6ced54815ba3bc107bf54.tres"
+uid="uid://dxc8j5nw4bkfs"
+path="res://.godot/imported/Quad.map-5b692fa3c4c6ced54815ba3bc107bf54.tres"
 
 [deps]
 
 source_file="res://maps/Quad.map"
-dest_files=[ "res://.import/Quad.map-5b692fa3c4c6ced54815ba3bc107bf54.tres" ]
+dest_files=["res://.godot/imported/Quad.map-5b692fa3c4c6ced54815ba3bc107bf54.tres"]
 
 [params]
 

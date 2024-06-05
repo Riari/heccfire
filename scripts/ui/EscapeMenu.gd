@@ -1,12 +1,12 @@
 extends Node
 
-onready var overlay = $Overlay
-onready var opt_continue = $Overlay/Items/Continue
-onready var opt_quit = $Overlay/Items/Quit
+@onready var overlay = $Overlay
+@onready var opt_continue = $Overlay/Items/Continue
+@onready var opt_quit = $Overlay/Items/Quit
 
 func _ready():
-	opt_continue.connect("pressed", self, "on_continue")
-	opt_quit.connect("pressed", self, "on_quit")
+	opt_continue.connect("pressed", Callable(self, "on_continue"))
+	opt_quit.connect("pressed", Callable(self, "on_quit"))
 
 func _unhandled_input(event):
 	if Input.is_action_just_pressed("ui_cancel"):

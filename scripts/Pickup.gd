@@ -1,11 +1,11 @@
-extends Area
+extends Area3D
 
-export(String, "AMMO_BLASTER") var pickup_type = "AMMO_BLASTER"
-export var pickup_amount = 10
-export var cooldown_time = 5
-export var cooldown_color = Color(0.5, 0.5, 0.5, 0.5)
+@export var pickup_type = "AMMO_BLASTER" # (String, "AMMO_BLASTER")
+@export var pickup_amount = 10
+@export var cooldown_time = 5
+@export var cooldown_color = Color(0.5, 0.5, 0.5, 0.5)
 
-onready var mesh_containers = {
+@onready var mesh_containers = {
 	"AMMO_BLASTER": $Types/BlasterAmmo
 }
 
@@ -14,7 +14,7 @@ var active = true
 var cooldown_timer = cooldown_time
 var mesh_container: Node
 var meshes = []
-var cooldown_material = SpatialMaterial.new()
+var cooldown_material = StandardMaterial3D.new()
 
 signal picked_up
 
@@ -30,12 +30,12 @@ func _ready():
 	cooldown_material.albedo_color = cooldown_color
 
 	for n in mesh_container.get_children():
-		if n is MeshInstance:
+		if n is MeshInstance3D:
 			meshes.append(n)
 
 func _process(delta):
 	self.rotate_y(delta)
-	self.global_transform.origin.y = origin.y + (cos(OS.get_ticks_msec() / 300.0) / 10.0)
+	self.global_transform.origin.y = origin.y + (cos(Time.get_ticks_msec() / 300.0) / 10.0)
 
 	if !active:
 		if cooldown_timer <= 0:

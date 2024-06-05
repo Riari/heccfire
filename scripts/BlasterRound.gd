@@ -1,8 +1,8 @@
-extends Area
+extends Area3D
 
 signal exploded
 
-export var muzzle_velocity = 35
+@export var muzzle_velocity = 35
 
 var velocity = Vector3.ZERO
 

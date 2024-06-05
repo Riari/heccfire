@@ -1,24 +1,24 @@
-extends KinematicBody
+extends CharacterBody3D
 
-export var max_speed = 16
-export var max_air_speed = 16
-export var acceleration = 10.0
-export var mouse_sensitivity = 0.002  # radians/pixel
-export (PackedScene) var Projectile
-export var recoil_intensity = 0.04
+@export var max_speed = 16
+@export var max_air_speed = 16
+@export var acceleration = 10.0
+@export var mouse_sensitivity = 0.002  # radians/pixel
+@export (PackedScene) var Projectile
+@export var recoil_intensity = 0.04
 
 const SWAY_SPEED = 120.0  # higher is slower
 const SWAY_INTENSITY = 20.0  # higher is less intense
 const HAND_MOTION_LERP_SPEED = 10.0  # higher is faster
 
-onready var head = $Head
-onready var hand = $Head/Hand
-onready var camera = $Head/Camera
-onready var weapon_viewport = $Head/WeaponViewportContainer/WeaponViewport
-onready var weapon_cam = $Head/WeaponViewportContainer/WeaponViewport/WeaponCam
-onready var weapon_muzzle = $Head/WeaponMuzzle
-onready var weapon_fire_audio = $Head/WeaponMuzzle/WeaponFire
-onready var jump_audio = $Jump
+@onready var head = $Head
+@onready var hand = $Head/Hand
+@onready var camera = $Head/Camera3D
+@onready var weapon_viewport = $Head/WeaponViewportContainer/WeaponViewport
+@onready var weapon_cam = $Head/WeaponViewportContainer/WeaponViewport/WeaponCam
+@onready var weapon_muzzle = $Head/WeaponMuzzle
+@onready var weapon_fire_audio = $Head/WeaponMuzzle/WeaponFire
+@onready var jump_audio = $Jump
 
 var gravity = -30
 var weapon_accuracy = 0.03
@@ -48,12 +48,12 @@ signal ammo_changed
 
 func _ready():
 	on_size_changed()
-	get_tree().get_root().connect("size_changed", self, "on_size_changed")
+	get_tree().get_root().connect("size_changed", Callable(self, "on_size_changed"))
 
 	hand_origin = hand.transform.origin
 	hand_rotation = hand.rotation
 	
-	weapon_viewport.world = get_world()
+	weapon_viewport.world = get_world_3d()
 
 	set_health(100)
 	set_ammo(Weapon.BLASTER, 30)
@@ -106,10 +106,14 @@ func _physics_process(delta):
 
 	velocity.x = lerp(velocity.x, desired_velocity.x, delta * acceleration)
 	velocity.z = lerp(velocity.z, desired_velocity.z, delta * acceleration)
-	velocity = move_and_slide(velocity, Vector3.UP, true)
+	set_velocity(velocity)
+	set_up_direction(Vector3.UP)
+	set_floor_stop_on_slope_enabled(true)
+	move_and_slide()
+	velocity = velocity
 
 	if is_on_floor() && (desired_velocity.x != 0 || desired_velocity.z != 0):
-		var t = OS.get_ticks_msec() / SWAY_SPEED
+		var t = Time.get_ticks_msec() / SWAY_SPEED
 		hand.transform.origin.x = lerp(hand.transform.origin.x, hand_origin.x + cos(t + PI) / SWAY_INTENSITY, delta * HAND_MOTION_LERP_SPEED)
 		hand.transform.origin.y = lerp(hand.transform.origin.y, hand_origin.y + cos(t * 2.0) / SWAY_INTENSITY, delta * HAND_MOTION_LERP_SPEED)
 		hand.transform.origin.z = lerp(hand.transform.origin.z, hand_origin.z, delta * HAND_MOTION_LERP_SPEED)
@@ -133,11 +137,11 @@ func on_pickup(node: Node, type: String, amount: int):
 	$HUD.on_pickup(node, type, amount)
 
 func fire():
-	var p = Projectile.instance()
+	var p = Projectile.instantiate()
 	get_parent().add_child(p)
 	p.transform = weapon_muzzle.global_transform
-	p.rotate_x(rand_range(-weapon_accuracy, weapon_accuracy))
-	p.rotate_y(rand_range(-weapon_accuracy, weapon_accuracy))
+	p.rotate_x(randf_range(-weapon_accuracy, weapon_accuracy))
+	p.rotate_y(randf_range(-weapon_accuracy, weapon_accuracy))
 	p.velocity = -p.transform.basis.z * p.muzzle_velocity
 	hand.transform.origin.z += recoil_intensity
 	hand.rotate_x(recoil_intensity * 2.0)

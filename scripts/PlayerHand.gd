@@ -1,12 +1,12 @@
-extends Spatial
+extends Node3D
 
 var mouse_moved = 0
 
-export var sway_threshold = 5
-export var sway_lerp = 5
-export var sway_left : Vector3
-export var sway_right : Vector3
-export var sway_normal : Vector3
+@export var sway_threshold = 5
+@export var sway_lerp = 5
+@export var sway_left : Vector3
+@export var sway_right : Vector3
+@export var sway_normal : Vector3
 
 func _input(event):
 	if Input.get_mouse_mode() != Input.MOUSE_MODE_CAPTURED:
@@ -25,4 +25,4 @@ func _process(delta):
 	else:
 		sway = sway_normal
 
-	rotation = rotation.linear_interpolate(sway, sway_lerp * delta)
+	rotation = rotation.lerp(sway, sway_lerp * delta)
