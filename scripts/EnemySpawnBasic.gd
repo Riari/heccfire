@@ -1,31 +1,27 @@
 extends CharacterBody3D
 
-var path = []
-var path_node = 0
-
-var speed = 10
-
-@onready var nav = get_parent()
+@export var movement_speed: float = 4.0
+@onready var navigation_agent: NavigationAgent3D = $NavigationAgent3D
 @onready var player = $"../../Player"
+var movement_delta: float
 
-func _ready():
-	pass
+func _ready() -> void:
+	navigation_agent.velocity_computed.connect(Callable(_on_velocity_computed))
+
+func set_movement_target(movement_target: Vector3):
+	navigation_agent.set_target_position(movement_target)
 
 func _physics_process(delta):
-	if path_node >= path.size():
+	if navigation_agent.is_navigation_finished():
 		return
-	
-	var direction = path[path_node] - global_transform.origin
-	if direction.length() < 1:
-		path_node += 1
+
+	movement_delta = movement_speed * delta
+	var next_path_position: Vector3 = navigation_agent.get_next_path_position()
+	var new_velocity: Vector3 = global_position.direction_to(next_path_position) * movement_delta
+	if navigation_agent.avoidance_enabled:
+		navigation_agent.set_velocity(new_velocity)
 	else:
-		set_velocity(direction.normalized() * speed)
-		set_up_direction(Vector3.UP)
-		move_and_slide()
+		_on_velocity_computed(new_velocity)
 
-func move_to(target_pos: Vector3):
-	path = nav.get_simple_path(global_transform.origin, target_pos)
-	path_node = 0
-
-func on_move_timer_timeout():
-	move_to(player.global_transform.origin)
+func _on_velocity_computed(safe_velocity: Vector3) -> void:
+	global_position = global_position.move_toward(player.global_transform.origin + safe_velocity, movement_delta)

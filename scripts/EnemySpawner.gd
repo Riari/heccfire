@@ -1,7 +1,7 @@
 extends Node
 
-@export (NodePath) var NavigationNode
-@export (PackedScene) var Enemy
+@export var NavigationNode: NodePath
+@export var Enemy: PackedScene
 
 @export var cooldown_time = 5
 @export var max_spawns = 10
