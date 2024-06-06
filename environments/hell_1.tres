@@ -1,18 +1,26 @@
-[gd_resource type="Environment" load_steps=2 format=2]
+[gd_resource type="Environment" load_steps=2 format=3 uid="uid://7roo0ykjsu8a"]
 
-[ext_resource path="res://sky/procedural_hell_1.tres" type="Sky" id=1]
+[ext_resource type="Sky" uid="uid://ji1ij7mftdb0" path="res://sky/procedural_hell_1.tres" id="1"]
 
 [resource]
 background_mode = 2
-background_sky = ExtResource( 1 )
-background_color = Color( 1, 0.258824, 0, 1 )
-ambient_light_color = Color( 1, 1, 1, 1 )
-ambient_light_sky_contribution = 0.6
-fog_enabled = true
-fog_color = Color( 0.184314, 0.0509804, 0.00392157, 1 )
-fog_depth_end = 56.3
+background_color = Color(1, 0.258824, 0, 1)
+background_energy_multiplier = 4.63
+sky = ExtResource("1")
+ambient_light_source = 3
+ambient_light_color = Color(0.525101, 0.525101, 0.525101, 1)
+ambient_light_sky_contribution = 0.3
+tonemap_mode = 2
+tonemap_exposure = 0.3
+tonemap_white = 0.47
+ssao_radius = 1.64
 glow_enabled = true
 glow_intensity = 8.0
 glow_strength = 0.92
-glow_bicubic_upscale = true
-glow_high_quality = true
+glow_bloom = 0.01
+glow_blend_mode = 0
+volumetric_fog_enabled = true
+volumetric_fog_density = 0.02
+volumetric_fog_albedo = Color(0.930282, 0.16341, 0.51275, 1)
+volumetric_fog_emission = Color(0.384169, 0.236222, 0.000835598, 1)
+volumetric_fog_temporal_reprojection_enabled = false
