@@ -4,7 +4,7 @@
 [ext_resource type="Environment" uid="uid://7roo0ykjsu8a" path="res://environments/hell_1.tres" id="2"]
 [ext_resource type="PackedScene" uid="uid://pha0l3bouic3" path="res://scenes/weapons/blaster.tscn" id="3"]
 [ext_resource type="Script" path="res://scripts/PlayerHand.gd" id="4"]
-[ext_resource type="PackedScene" path="res://scenes/ui/HUD.tscn" id="5"]
+[ext_resource type="PackedScene" uid="uid://0y83mvs25dlg" path="res://scenes/ui/HUD.tscn" id="5"]
 [ext_resource type="PackedScene" uid="uid://fnxqejjs2j2u" path="res://scenes/projectiles/BlasterRound.tscn" id="6"]
 [ext_resource type="AudioStream" uid="uid://ci4ifyw7pxkjc" path="res://raw_assets/audio/Blaster Fire 1/Blaster Fire 1 Mixdown.wav" id="7"]
 [ext_resource type="AudioStream" uid="uid://ck8fra8v3ikrk" path="res://raw_assets/audio/Jump1.mp3" id="8"]
@@ -87,8 +87,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.55778, 0)
 layers = 3
 
 [node name="HUD" parent="." instance=ExtResource("5")]
-layout_mode = 3
-anchors_preset = 15
 grow_horizontal = 2
 grow_vertical = 2
 
