@@ -1,5 +1,8 @@
-[gd_resource type="CapsuleMesh" format=2]
+[gd_resource type="CapsuleMesh" load_steps=2 format=3 uid="uid://c6nqxi1wjtnbt"]
+
+[ext_resource type="Material" path="res://materials/blaster_round.tres" id="1_qgaex"]
 
 [resource]
-radius = 0.01
-mid_height = 0.05
+material = ExtResource("1_qgaex")
+radius = 0.02
+height = 0.5
