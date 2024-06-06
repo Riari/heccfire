@@ -1,15 +1,15 @@
 extends CharacterBody3D
 
-@export var max_speed = 16
-@export var max_air_speed = 16
-@export var acceleration = 10.0
-@export var mouse_sensitivity = 0.002  # radians/pixel
-@export (PackedScene) var Projectile
-@export var recoil_intensity = 0.04
+@export var max_speed: float = 16
+@export var max_air_speed: float = 16
+@export var acceleration: float = 10.0
+@export var mouse_sensitivity: float = 0.002  # radians/pixel
+@export var Projectile: PackedScene
+@export var recoil_intensity: float = 0.04
 
-const SWAY_SPEED = 120.0  # higher is slower
-const SWAY_INTENSITY = 20.0  # higher is less intense
-const HAND_MOTION_LERP_SPEED = 10.0  # higher is faster
+const SWAY_SPEED: float = 120.0  # higher is slower
+const SWAY_INTENSITY: float = 20.0  # higher is less intense
+const HAND_MOTION_LERP_SPEED: float = 10.0  # higher is faster
 
 @onready var head = $Head
 @onready var hand = $Head/Hand
@@ -23,7 +23,7 @@ const HAND_MOTION_LERP_SPEED = 10.0  # higher is faster
 var gravity = -30
 var weapon_accuracy = 0.03
 var was_on_floor = true
-var velocity = Vector3()
+var move_velocity = Vector3()
 var hand_origin
 var hand_rotation
 
@@ -52,8 +52,6 @@ func _ready():
 
 	hand_origin = hand.transform.origin
 	hand_rotation = hand.rotation
-	
-	weapon_viewport.world = get_world_3d()
 
 	set_health(100)
 	set_ammo(Weapon.BLASTER, 30)
@@ -100,17 +98,17 @@ func _physics_process(delta):
 	var desired_velocity = get_input() * max_air_speed
 	
 	if !is_on_floor():
-		velocity.y += delta * gravity
+		move_velocity.y += delta * gravity
 	elif desired_velocity.y != 0:
-		velocity.y = desired_velocity.y
+		move_velocity.y = desired_velocity.y
 
-	velocity.x = lerp(velocity.x, desired_velocity.x, delta * acceleration)
-	velocity.z = lerp(velocity.z, desired_velocity.z, delta * acceleration)
-	set_velocity(velocity)
+	move_velocity.x = lerp(move_velocity.x, desired_velocity.x, delta * acceleration)
+	move_velocity.z = lerp(move_velocity.z, desired_velocity.z, delta * acceleration)
+	set_velocity(move_velocity)
 	set_up_direction(Vector3.UP)
 	set_floor_stop_on_slope_enabled(true)
 	move_and_slide()
-	velocity = velocity
+	velocity = move_velocity
 
 	if is_on_floor() && (desired_velocity.x != 0 || desired_velocity.z != 0):
 		var t = Time.get_ticks_msec() / SWAY_SPEED
