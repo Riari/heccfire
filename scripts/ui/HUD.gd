@@ -35,5 +35,5 @@ func on_ammo_changed(amount: int):
 	ammo_amount = amount
 	ammo.text = str(ammo_amount)
 
-func on_pickup(node: Node, type: String, amount: int):
+func on_pickup(_node: Node, _type: String, _amount: int):
 	$CrosshairContainer/PickupAudio.play()

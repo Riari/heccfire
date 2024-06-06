@@ -1,6 +1,7 @@
-[gd_scene load_steps=4 format=3 uid="uid://cpnhmq6l6cewi"]
+[gd_scene load_steps=5 format=3 uid="uid://cpnhmq6l6cewi"]
 
 [ext_resource type="Script" path="res://scripts/EnemySpawnBasic.gd" id="1"]
+[ext_resource type="Material" uid="uid://c5nk705xrfyw" path="res://materials/enemy_orb_a.tres" id="2_a41c8"]
 
 [sub_resource type="SphereShape3D" id="27"]
 
@@ -15,5 +16,12 @@ shape = SubResource("27")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 mesh = SubResource("28")
+surface_material_override/0 = ExtResource("2_a41c8")
 
 [node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
+
+[node name="MoveTimer" type="Timer" parent="."]
+wait_time = 0.5
+autostart = true
+
+[connection signal="timeout" from="MoveTimer" to="." method="on_move_timer_timeout"]
